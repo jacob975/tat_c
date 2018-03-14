@@ -1,0 +1,3 @@
+# how to compile c file?
+
+gcc file_name1.c file_name2.c -o output_binary_name
