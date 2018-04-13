@@ -3,7 +3,7 @@
 #include <sys/stat.h>
 #include"key.h"
 
-int main()
+int main(int argc, char **argv[])
 {
     // initialize variables and constants
     int test_segid;
@@ -11,19 +11,33 @@ int main()
     struct shmid_ds shmbuffer;          // [struct type] [ struct name] [ variable name]
     int segment_size;
     const int shared_segment_size = 0x6400;
+    
+    // check arguments
+    
+    if (argc != 2)
+    {
+        printf("Usage: %s [remain or kill the shm]", argv[0]);
+        return 1;
+    }
 
-    /* Reattach the shared memory segment, at a different address. */
+    /* Reallocate the shared memory */
     test_segid = shmget (TEST_KEY, shared_segment_size,
                         S_IRUSR | S_IWUSR | S_IROTH | S_IWOTH);
-    shared_memory = (char*) shmat(test_segid, (void*) 0x5000000, 0);
+    // Reattach shared memory
+    shared_memory = (char*) shmat(test_segid, 0, 0);
     printf("shared memory reattached at address %p\n", shared_memory);
     /* Prin out the string from shared memory. */
-    printf ("%s\n", shared_memory);
-    /* Detach the shared memory segment. */
-    shmdt(shared_memory);
-
-    /* Deallocate the shared memory segment. */
-    shmctl(test_segid, IPC_RMID, 0);
-
+    printf ("before:\t%s\n", shared_memory);
+    sprintf(shared_memory, "%s %s", shared_memory, "XD");
+    printf ("after:\t%s\n", shared_memory);
+    
+    if (!strcmp(argv[1], "kill"))
+    {
+        /* Detach the shared memory segment. */
+        shmdt(shared_memory);
+        /* Deallocate the shared memory segment. */
+        shmctl(test_segid, IPC_RMID, 0);
+    }
+    
     return 0;
 }

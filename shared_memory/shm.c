@@ -19,6 +19,7 @@ int main()
     printf("shared memory attached at address %p\n", shared_memory);
     /* Determine the segment's size. */
     shmctl (segment_id, IPC_STAT, &shmbuffer);
+    segment_size = shmbuffer.shm_segsz;
     printf("segment size:%d\n", segment_size);
     /* Write a string to the shared memory segment. */
     sprintf(shared_memory, "Hello, world.");

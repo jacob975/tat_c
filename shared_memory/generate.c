@@ -18,7 +18,7 @@ int main()
     /* Attach the shared meory segment.*/
     shared_memory = (char*) shmat (test_segid, 0, 0);
     printf("shared memory attached at address %p\n", shared_memory);
-    /* Determine the segment's size. */
+    /* Show the segment's size. */
     shmctl (test_segid, IPC_STAT, &shmbuffer);
     segment_size = shmbuffer.shm_segsz;
     printf("segment size:%d\n", segment_size);
