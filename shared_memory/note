@@ -1,0 +1,2 @@
+gcc generate.c key.h -o gen
+gcc load.c key.h -o load

@@ -16,7 +16,7 @@ int main(int argc, char **argv[])
     
     if (argc != 2)
     {
-        printf("Usage: %s [remain or kill the shm]", argv[0]);
+        printf("Usage: %s [remain or kill the shm]\n", argv[0]);
         return 1;
     }
 
@@ -37,7 +37,10 @@ int main(int argc, char **argv[])
         shmdt(shared_memory);
         /* Deallocate the shared memory segment. */
         shmctl(test_segid, IPC_RMID, 0);
+        printf("Shared memory is killed\n");
     }
+    else
+        printf("Shared memory is remained\n");
     
     return 0;
 }
