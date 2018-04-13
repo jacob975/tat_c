@@ -8,8 +8,6 @@ int main(int argc, char **argv[])
     // initialize variables and constants
     int test_segid;
     char* shared_memory;
-    struct shmid_ds shmbuffer;          // [struct type] [ struct name] [ variable name]
-    int segment_size;
     const int shared_segment_size = 0x6400;
     
     // check arguments
