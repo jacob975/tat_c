@@ -3,6 +3,6 @@
 
 int main(void)
 {
-    printf("hello\n%d + %d = %d", 2, 3, add_interger(2, 3));
+    printf("hello\n%d + %d = %d\n", 2, 3, add_interger(2, 3));
     return 0;
 } 
