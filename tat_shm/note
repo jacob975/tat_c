@@ -1,0 +1,2 @@
+gcc create_tat_info_shm.c tat_info.c tat_info.h -o gen
+gcc read_tat_info_shm.c tat_info.c tat_info.h -o load
