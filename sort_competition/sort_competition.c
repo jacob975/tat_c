@@ -24,6 +24,9 @@ int main()
     pthread_t binary_thread, select_thread, bubble_thread;
     srand(time(NULL));   // should only be called once
     
+    //initialize timer
+    gettimeofday(&tval_before, NULL);
+    
     // initialize lists
     init_array(array_1);
     init_array(array_2);
@@ -61,6 +64,10 @@ int main()
         fprintf(stderr, "Error joining thread\n");
         return 2;
     }
+    // check timer
+    gettimeofday(&tval_after, NULL);
+    timersub(&tval_after, &tval_before, &tval_result);
+    printf("Time elapsed: %ld.%06ld\n", (long int)tval_result.tv_sec, (long int)tval_result.tv_usec);
     return 0;
 }
 
